@@ -11,7 +11,7 @@ class ListAllUsersUseCase {
   execute({ user_id }: IRequest): User[] {
     const auth_user = this.usersRepository.findById(user_id);
 
-    if (!auth_user || !auth_user.admin) throw new Error("invalid auth user");
+    if (!auth_user || !auth_user.admin) throw new Error("Invalid auth user");
 
     return this.usersRepository.list();
   }

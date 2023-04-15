@@ -1,0 +1,246 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ignite Swagger",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "get" : {
+        "tags" : ["Users"],
+        "parameters": [{
+          "in": "header",
+          "name": "user_id",
+          "required": true,
+          "example": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "uuid"},
+                      "name": {"type": "string"},
+                      "email": {"type": "string"},
+                      "admin": {"type": "boolean"},
+                      "created_at": {"type": "Date"},
+                      "updated_at": {"type": "Date"}
+                    },
+                    "example": {
+                      "id": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+                      "name": "João",
+                      "email": "joao@email.com",
+                      "admin": false,
+                      "created_at": "2023-04-15T04:15:42.567Z",
+                      "updated_at": "2023-04-15T04:15:42.567Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string"}
+                  },
+                  "example": {
+                    "error": "Invalid auth user"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "email"],
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "email": {"type": "string"}
+                },
+                "example": {
+                  "name": "João",
+                  "email": "joao@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "uuid"},
+                    "name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "admin": {"type": "boolean"},
+                    "created_at": {"type": "Date"},
+                    "updated_at": {"type": "Date"}
+                  },
+                  "example": {
+                    "id": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+                    "name": "João",
+                    "email": "joao@email.com",
+                    "admin": false,
+                    "created_at": "2023-04-15T04:15:42.567Z",
+                    "updated_at": "2023-04-15T04:15:42.567Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string"}
+                  },
+                  "example": {
+                    "error": "Email already in use"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get" : {
+        "tags" : ["Users"],
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "example": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "uuid"},
+                    "name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "admin": {"type": "boolean"},
+                    "created_at": {"type": "Date"},
+                    "updated_at": {"type": "Date"}
+                  },
+                  "example": {
+                    "id": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+                    "name": "João",
+                    "email": "joao@email.com",
+                    "admin": false,
+                    "created_at": "2023-04-15T04:15:42.567Z",
+                    "updated_at": "2023-04-15T04:15:42.567Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string"}
+                  },
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch" : {
+        "tags" : ["Users"],
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "example": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "uuid"},
+                    "name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "admin": {"type": "boolean"},
+                    "created_at": {"type": "Date"},
+                    "updated_at": {"type": "Date"}
+                  },
+                  "example": {
+                    "id": "e5dde13d-fec4-4215-aa73-d6d5a68a0793",
+                    "name": "João",
+                    "email": "joao@email.com",
+                    "admin": true,
+                    "created_at": "2023-04-15T04:15:42.567Z",
+                    "updated_at": "2023-04-15T04:15:42.567Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string"}
+                  },
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
